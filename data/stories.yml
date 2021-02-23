@@ -25,6 +25,16 @@ stories:
   - slot_was_set:
     - price: mid
   - action: action_search_restaurants
+  - action: utter_email_conf
+  - intent: affirm
+  - action: utter_ask_email
+  - intent: email_confirmation
+    entities:
+    - email: sriks@gmail.com
+  - slot_was_set:
+    - email: sriks@gmail.com
+  - action: action_send_email
+  - action: utter_email_sent
   - action: utter_goodbye
 
 - story: location specified
@@ -132,7 +142,6 @@ stories:
   - slot_was_set:
     - location: delhi
 
-
 - story: interactive_story_1
   steps:
   - intent: greet
@@ -158,7 +167,6 @@ stories:
   - slot_was_set:
     - location: mumbai
   - intent: stop
-
 
 - story: interactive_story_1
   steps:

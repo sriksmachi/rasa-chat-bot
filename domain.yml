@@ -1,25 +1,33 @@
+version: '2.0'
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true
 intents:
 - restaurant_search
 - greet
-- affirm
 - goodbye
+- email_confirmation
+- affirm
 - stop
-
 entities:
 - cuisine
+- email
 - location
 - people
 - price
-- email
-
 slots:
   cuisine:
     type: text
+    influence_conversation: true
   location:
     type: text
+    influence_conversation: true
   price:
     type: text
-
+    influence_conversation: true
+  email:
+    type: text
+    influence_conversation: true
 responses:
   utter_ask_cuisine:
   - buttons:
@@ -44,7 +52,9 @@ responses:
       title: Rs. 300 to 700
     - payload: high
       title: Above 700
-    text: What price range are you looking at ? Showing below price ranges for Average Cost for 2. 
+    text: What price range are you looking at ? Showing below price ranges for Average Cost for 2.
+  utter_email_conf:
+  - text: Should I send you details of all the restaurants on email?
   utter_ask_howcanhelp:
   - text: how can I help you?
   utter_ask_location:
@@ -58,13 +68,30 @@ responses:
   - text: hey there! How may i help you
   - text: Hi, How can I help you!
   - text: Hey, How is it going. How May I help you Today
+  utter_ask_email:
+  - text: Can you please share your email Id?
+  utter_email_sent:
+  - text: Email Sent! Enjoy your food
+  utter_budget_error:
+  - text: Sorry, I couldn't get you. Please choose one of the budget options from the above mentioned options.
+  utter_cuisine_error:
+  - text: Sorry, I couldn't get you. Please choose one of the cuisine options from the above mentioned options.
+  utter_no_results_found:
+  - text: Sorry, No results found for your criteria. Would you like to search for some other restaurants?
 
 actions:
 - action_search_restaurants
 - utter_ask_cuisine
 - utter_ask_howcanhelp
 - utter_ask_location
+- utter_ask_price
+- utter_email_conf
 - utter_default
 - utter_goodbye
 - utter_greet
-- utter_ask_price
+- utter_ask_email
+- utter_email_sent
+- utter_budget_error
+- utter_cuisine_error
+- utter_no_results_found
+- action_send_email

@@ -24,6 +24,7 @@ nlu:
     - farewell
     - Bye bye
     - have a good one
+    - low
 - intent: greet
   examples: |
     - hey
@@ -71,6 +72,11 @@ nlu:
     - [delhi](location)
     - please find me a restaurant in [ahmedabad](location)
     - please show me a few [italian](cuisine) restaurants in [bangalore](location)
+    - im hungry
+    - [Delhi](location)
+    - [Chinese]{"entity": "cuisine", "value": "chinese"}
+    - [low]{ "entity" : "price", "value" : "low" }
+    
 - synonym: chinese
   examples: |
     - chines
