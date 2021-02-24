@@ -14,6 +14,54 @@ nlu:
     - great choice
     - sounds really good
     - thanks
+
+
+- intent: deny
+  examples: |
+    - no
+    - nope
+    - definitely not
+    - never
+    - absolutely not
+    - i don't think so
+    - i'm afraid not
+    - no sir
+    - no ma'am
+    - no way
+    - no sorry
+    - No, not really.
+    - nah not for me
+    - nah
+    - no and no again
+    - no go
+    - no thanks
+    - decline
+    - deny
+    - i decline
+    - never mind
+    - nevermind
+    - I'm not giving you my email address
+    - no I haven't decided yet if I want to sign up
+    - I don't want to give it to you
+    - I'm not going to give it to you
+    - no i don't accept
+    - no!!!!
+    - no you did it wrong
+    - no i can't
+    - i'm not sure
+    - NEIN
+    - nein
+    - not really
+    - i guess it means - no
+    - i don't want to
+    - i don't want either of those
+    - nah thanks
+    - neither of these
+    - i don't like that option
+    - neither will work
+    - suggest some other option
+    - is this the best you can do
+
 - intent: goodbye
   examples: |
     - bye
@@ -24,7 +72,6 @@ nlu:
     - farewell
     - Bye bye
     - have a good one
-    - low
 - intent: greet
   examples: |
     - hey
@@ -74,9 +121,21 @@ nlu:
     - please show me a few [italian](cuisine) restaurants in [bangalore](location)
     - im hungry
     - [Delhi](location)
-    - [Chinese]{"entity": "cuisine", "value": "chinese"}
-    - [low]{ "entity" : "price", "value" : "low" }
-    
+    - [low](price)
+    - [mid](price)
+    - [high](price)
+    - hungry
+    - [chandigarh](location)
+    - [North Indian](cuisine)
+    - [low](price)
+
+- intent: email_confirmation
+  examples: |
+    - [abc@gmail.com](email)
+    - [abc@yahoo.co.in](email)
+    - my email id is [abc@gmail.com](email)
+    - email id is [abc@gmail.com](email)
+    - yes. Please send it to [abc@gmail.com](email)
 - synonym: chinese
   examples: |
     - chines
@@ -89,6 +148,12 @@ nlu:
   examples: |
     - moderate
     - medium
+    - in the range of 300 to 700
+    - in range of 300 to 700
+    - 300 to 700
+    - 300-700
+    - Rs. 300 to 700
+    - Rs.300 to 700
 - synonym: '4'
   examples: |
     - four

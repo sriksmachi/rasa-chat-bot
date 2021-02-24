@@ -9,6 +9,7 @@ intents:
 - email_confirmation
 - affirm
 - stop
+- deny
 entities:
 - cuisine
 - email
@@ -18,16 +19,19 @@ entities:
 slots:
   cuisine:
     type: text
-    influence_conversation: true
+    influence_conversation: false
   location:
     type: text
-    influence_conversation: true
+    influence_conversation: false
   price:
     type: text
-    influence_conversation: true
+    influence_conversation: false
   email:
     type: text
-    influence_conversation: true
+    influence_conversation: false
+  email_body:
+    type: text
+    influence_conversation: false
 responses:
   utter_ask_cuisine:
   - buttons:
@@ -54,7 +58,7 @@ responses:
       title: Above 700
     text: What price range are you looking at ? Showing below price ranges for Average Cost for 2.
   utter_email_conf:
-  - text: Should I send you details of all the restaurants on email?
+  - text: Should I send you details of top 10 restaurants on email?
   utter_ask_howcanhelp:
   - text: how can I help you?
   utter_ask_location:
@@ -78,20 +82,19 @@ responses:
   - text: Sorry, I couldn't get you. Please choose one of the cuisine options from the above mentioned options.
   utter_no_results_found:
   - text: Sorry, No results found for your criteria. Would you like to search for some other restaurants?
-
 actions:
 - action_search_restaurants
+- action_send_email
 - utter_ask_cuisine
+- utter_ask_email
 - utter_ask_howcanhelp
 - utter_ask_location
 - utter_ask_price
-- utter_email_conf
-- utter_default
-- utter_goodbye
-- utter_greet
-- utter_ask_email
-- utter_email_sent
 - utter_budget_error
 - utter_cuisine_error
+- utter_default
+- utter_email_conf
+- utter_email_sent
+- utter_goodbye
+- utter_greet
 - utter_no_results_found
-- action_send_email
