@@ -37,7 +37,8 @@ class ActionSearchRestaurants(Action):
 		bot_response_header = "Showing top 5 restaurants \n===========================================\n"
 		email_response_header = "Top 10 restaurants \n===========================================\n"
 		if results.shape[0] == 0:
-				dispatcher.utter_message("Sorry, no restaurant found for your criteria. Would you like to search for some other restaurants?")
+				dispatcher.utter_message("Sorry, no restaurant found for your criteria. you might what to start over?")
+				return [SlotSet('no_restaurant_found', 'yes')]
 		else:
 			for restaurant in results.iterrows():
 				count = count + 1
@@ -47,8 +48,9 @@ class ActionSearchRestaurants(Action):
 					dispatcher.utter_message(bot_response_header + response) # dispatch the message to caller
 			if(count<5 and count >0):
 					dispatcher.utter_message(bot_response_header + response)
-		print(response)
-		return [SlotSet('email_body', email_response_header + response)]
+			print(response)
+			SlotSet('no_restaurant_found', 'no')
+			return [SlotSet('email_body', email_response_header + response)]
 
 class ActionSendEmail(Action):
 	

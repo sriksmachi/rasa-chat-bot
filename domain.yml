@@ -32,6 +32,11 @@ slots:
   email_body:
     type: text
     influence_conversation: false
+  no_restaurant_found:
+    type: categorical
+    values:
+      - yes
+      - no
 responses:
   utter_ask_cuisine:
   - buttons:
