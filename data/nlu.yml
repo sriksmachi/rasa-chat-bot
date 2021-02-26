@@ -108,7 +108,7 @@ nlu:
     - in [delhi](location)
     - I am looking for some restaurants in [Mumbai](location)
     - I am looking for [mexican indian fusion](cuisine)
-    - can you book a table in [rome](location) in a [moderate]{"entity": "price", "value": "mid"} price range with [british](cuisine) food for [four]{"entity": "people", "value": "4"} people
+    - can you book a table in [rome](location) in a [moderate]{"entity": "price", "value": "mid"} price range with [british](cuisine) food for four people
     - [central](location) [indian](cuisine) restaurant
     - please help me to find restaurants in [pune](location)
     - Please find me a restaurantin [bangalore](location)
