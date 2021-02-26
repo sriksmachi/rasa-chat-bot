@@ -14,6 +14,7 @@ ZomatoData = pd.read_csv('zomato.csv')
 ZomatoData = ZomatoData.drop_duplicates().reset_index(drop=True)
 
 def RestaurantSearch(City,Cuisine,Price):
+	print(City, Cuisine, Price)
 	zomato_data = ZomatoData[(ZomatoData['Cuisines'].apply(lambda x: Cuisine.lower() in x.lower())) & (ZomatoData['City'].apply(lambda x: City.lower() in x.lower()))]
 	if(Price == "low"):
 		TEMP = zomato_data[ZomatoData["Average Cost for two"] <= 300]
@@ -21,7 +22,17 @@ def RestaurantSearch(City,Cuisine,Price):
 		TEMP = zomato_data[(ZomatoData["Average Cost for two"] > 300) & (ZomatoData["Average Cost for two"] <= 700)]
 	elif(Price == "high"):
 		TEMP = zomato_data[(ZomatoData["Average Cost for two"] > 700)]
+	else:
+		return pd.DataFrame()
 	return TEMP[['Restaurant Name','Address','Average Cost for two','Aggregate rating']].sort_values('Aggregate rating', ascending = False)[:10]
+
+def get_price_range(price):
+	if(price == "low"):
+		return "less than Rs. 300"
+	elif(price=="mid"):
+		return "between Rs 300 to 700"
+	elif(price=="high"):
+		return "greater than 700"
 
 class ActionSearchRestaurants(Action):	
 	def name(self):
@@ -31,6 +42,8 @@ class ActionSearchRestaurants(Action):
 		loc = tracker.get_slot('location')
 		cuisine = tracker.get_slot('cuisine')
 		price = tracker.get_slot('price')
+		price_range = get_price_range(price)
+		dispatcher.utter_message("Searching restaurants in {0} restaurants at {1}, in price range {2}.......\n".format(cuisine, loc, price_range));
 		results = RestaurantSearch(City=loc,Cuisine=cuisine,Price=price)
 		response=""
 		count = 0
@@ -51,6 +64,8 @@ class ActionSearchRestaurants(Action):
 			print(response)
 			SlotSet('no_restaurant_found', 'no')
 			return [SlotSet('email_body', email_response_header + response)]
+
+
 
 class ActionSendEmail(Action):
 	

@@ -2,6 +2,7 @@ version: '2.0'
 session_config:
   session_expiration_time: 60
   carry_over_slots_to_new_session: true
+
 intents:
 - restaurant_search
 - greet
@@ -10,22 +11,33 @@ intents:
 - affirm
 - stop
 - deny
+- budget
+- out_of_scope
+
 entities:
 - cuisine
 - email
 - location
-- people
 - price
 slots:
   cuisine:
-    type: text
-    influence_conversation: false
+    type: categorical
+    values: 
+      - Chinese
+      - Italian
+      - North Indian
+      - South Indian
+      - Mexican
+      - American
   location:
     type: text
     influence_conversation: false
   price:
-    type: text
-    influence_conversation: false
+    type: categorical
+    values:
+      - Lesser than Rs. 300
+      - Rs. 300 to 700
+      - Above 700
   email:
     type: text
     influence_conversation: false
@@ -86,7 +98,9 @@ responses:
   utter_cuisine_error:
   - text: Sorry, I couldn't get you. Please choose one of the cuisine options from the above mentioned options.
   utter_no_results_found:
-  - text: Sorry, No results found for your criteria. Would you like to search for some other restaurants?
+  - text: Sorry, No results found for your criteria. We hope to serve you better next time !
+  utter_out_of_scope:
+  - text: Sorry, I do not understand this. Please be specific.
 actions:
 - action_search_restaurants
 - action_send_email

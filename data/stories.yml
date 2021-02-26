@@ -19,7 +19,7 @@ stories:
   - slot_was_set:
     - cuisine: chinese
   - action: utter_ask_price
-  - intent: restaurant_search
+  - intent: budget
     entities:
     - price: mid
   - slot_was_set:
@@ -27,7 +27,7 @@ stories:
   - action: action_search_restaurants
   - slot_was_set:
     - email_body: Top 10 restaurants 
-    - no_restaurant_found: False
+    - no_restaurant_found: no
   - action: utter_email_conf
   - intent: affirm
   - action: utter_ask_email
@@ -58,7 +58,7 @@ stories:
   - slot_was_set:
     - cuisine: chinese
   - action: utter_ask_price
-  - intent: restaurant_search
+  - intent: budget
     entities:
     - price: mid
   - slot_was_set:
@@ -66,7 +66,7 @@ stories:
   - action: action_search_restaurants
   - slot_was_set:
     - email_body: Top 10 restaurants 
-    - no_restaurant_found: False
+    - no_restaurant_found: no
   - action: utter_email_conf
   - intent: deny
   - action: utter_goodbye
@@ -89,7 +89,7 @@ stories:
   - slot_was_set:
     - cuisine: chinese
   - action: utter_ask_price
-  - intent: restaurant_search
+  - intent: budget
     entities:
     - price: mid
   - slot_was_set:
@@ -98,3 +98,136 @@ stories:
   - slot_was_set:
     - no_restaurant_found: yes
   - action: action_restart
+
+- story: 4_location_specified_valid_when_user_asks_email
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: restaurant_search
+    entities:
+    - location: delhi
+  - slot_was_set:
+    - location: delhi
+  - action: utter_ask_cuisine
+  - intent: restaurant_search
+    entities:
+    - cuisine: chinese
+  - slot_was_set:
+    - cuisine: chinese
+  - action: utter_ask_price
+  - intent: budget
+    entities:
+    - price: mid
+  - slot_was_set:
+    - price: mid
+  - action: action_search_restaurants
+  - slot_was_set:
+    - email_body: Top 10 restaurants 
+    - no_restaurant_found: no
+  - action: utter_email_conf
+  - intent: affirm
+  - action: utter_ask_email
+  - intent: email_confirmation
+    entities:
+    - email: sriks@gmail.com
+  - slot_was_set:
+    - email: sriks@gmail.com
+  - action: action_send_email
+  - action: utter_email_sent
+  - action: utter_goodbye
+
+- story: 5_location_specified_valid_when_user_denies_email
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: restaurant_search
+    entities:
+    - location: delhi
+  - slot_was_set:
+    - location: delhi
+  - action: utter_ask_cuisine
+  - intent: restaurant_search
+    entities:
+    - cuisine: chinese
+  - slot_was_set:
+    - cuisine: chinese
+  - action: utter_ask_price
+  - intent: budget
+    entities:
+    - price: mid
+  - slot_was_set:
+    - price: mid
+  - action: action_search_restaurants
+  - slot_was_set:
+    - email_body: Top 10 restaurants 
+    - no_restaurant_found: no
+  - action: utter_email_conf
+  - intent: deny
+  - action: utter_goodbye
+
+- story: 6_invalid_greet_out_of_scope
+  steps: 
+  - intent: greet 
+  - action: utter_greet
+  - intent: out_of_scope
+  - action: utter_out_of_scope
+  - action: utter_goodbye
+  - action: action_restart
+
+- story: 7_location_cusine_specified_valid_when_user_asks_email
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: restaurant_search
+    entities:
+    - location: delhi
+    - cuisine: chinese
+  - slot_was_set:
+    - location: delhi
+    - cuisine: chinese
+  - action: utter_ask_price
+  - intent: budget
+    entities:
+    - price: mid
+  - slot_was_set:
+    - price: mid
+  - action: action_search_restaurants
+  - slot_was_set:
+    - email_body: Top 10 restaurants 
+    - no_restaurant_found: no
+  - action: utter_email_conf
+  - intent: affirm
+  - action: utter_ask_email
+  - intent: email_confirmation
+    entities:
+    - email: sriks@gmail.com
+  - slot_was_set:
+    - email: sriks@gmail.com
+  - action: action_send_email
+  - action: utter_email_sent
+  - action: utter_goodbye
+
+- story: 8_location_cuisine_specified_valid_when_user_denies_email
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: restaurant_search
+    entities:
+    - location: delhi
+    - cuisine: chinese
+  - slot_was_set:
+    - location: delhi
+    - cuisine: chinese
+  - action: utter_ask_price
+  - intent: budget
+    entities:
+    - price: mid
+  - slot_was_set:
+    - price: mid
+  - action: action_search_restaurants
+  - slot_was_set:
+    - email_body: Top 10 restaurants 
+    - no_restaurant_found: no
+  - action: utter_email_conf
+  - intent: deny
+  - action: utter_goodbye
