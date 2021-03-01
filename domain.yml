@@ -2,18 +2,16 @@ version: '2.0'
 session_config:
   session_expiration_time: 60
   carry_over_slots_to_new_session: true
-
 intents:
+- email_confirmation
+- budget
 - restaurant_search
 - greet
 - goodbye
-- email_confirmation
 - affirm
 - stop
 - deny
-- budget
 - out_of_scope
-
 entities:
 - cuisine
 - email
@@ -22,22 +20,24 @@ entities:
 slots:
   cuisine:
     type: categorical
-    values: 
-      - Chinese
-      - Italian
-      - North Indian
-      - South Indian
-      - Mexican
-      - American
+    influence_conversation: true
+    values:
+    - chinese
+    - italian
+    - north indian
+    - south indian
+    - mexican
+    - american
   location:
     type: text
     influence_conversation: false
   price:
     type: categorical
+    influence_conversation: true
     values:
-      - Lesser than Rs. 300
-      - Rs. 300 to 700
-      - Above 700
+    - lesser than rs. 300
+    - rs. 300 to 700
+    - above 700
   email:
     type: text
     influence_conversation: false
@@ -46,14 +46,16 @@ slots:
     influence_conversation: false
   no_restaurant_found:
     type: categorical
+    influence_conversation: true
     values:
-      - yes
-      - no
+    - yes
+    - no
   invalid_email:
     type: categorical
+    influence_conversation: true
     values:
-      - yes
-      - no
+    - yes
+    - no
 responses:
   utter_ask_cuisine:
   - buttons:
@@ -107,8 +109,10 @@ responses:
   utter_out_of_scope:
   - text: Sorry, I do not understand this. Please be specific.
 actions:
+- action_search_city
 - action_search_restaurants
 - action_send_email
+- action_val_email
 - utter_ask_cuisine
 - utter_ask_email
 - utter_ask_howcanhelp
@@ -122,5 +126,3 @@ actions:
 - utter_goodbye
 - utter_greet
 - utter_no_results_found
-- action_search_city
-- action_val_email

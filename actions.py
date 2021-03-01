@@ -6,6 +6,7 @@ from rasa_sdk import Action
 from rasa_sdk.events import SlotSet
 import pandas as pd
 import json
+import re
 import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
@@ -47,6 +48,8 @@ class ActionValEmail(Action):
 
 	def run(self, dispatcher, tracker, domain):
 		to_user = tracker.get_slot('email')
+		print("validating email")
+		print(to_user)
 		if re.search(r'\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}\b', to_user, re.I):
 			return [SlotSet('invalid_email', 'no')]
 		else:
@@ -93,7 +96,6 @@ class ActionSearchCity(Action):
 		loc = tracker.get_slot('location')
 		result = CitySearch(City=loc)
 		print(result)
-		response=""
 		if result == '0':
 			dispatcher.utter_message("Sorry, we don’t operate in this city. Can you please specify some other location?")
 			return [SlotSet('no_restaurant_found', 'yes')]
@@ -107,9 +109,10 @@ class ActionSendEmail(Action):
 
 	def run(self, dispatcher, tracker, domain):
 			try:
-				from_user = 'replace-with-your-own' # replace email with your own
+				from_user = 'upgrad.sriks@gmail.com' # replace email with your own
 				to_user = tracker.get_slot('email')
-				password = 'replace-with-your-own' # replace password with your own
+				print('sending email to ' + to_user)
+				password = 'ap28be4393' # replace password with your own
 				server = smtplib.SMTP('smtp.gmail.com',587)
 				server.starttls()
 				server.login(from_user, password)
@@ -125,4 +128,3 @@ class ActionSendEmail(Action):
 				server.close()
 			except: 
 				dispatcher.utter_message("Something went wrong, we could not send you the email. Please try again later.")
-			return [AllSlotsReset()]

@@ -29,7 +29,7 @@ stories:
     - price: mid
   - action: action_search_restaurants
   - slot_was_set:
-    - email_body: Top 10 restaurants 
+    - email_body: "Top 10 restaurants" 
     - no_restaurant_found: no
   - action: utter_email_conf
   - intent: affirm
@@ -45,6 +45,7 @@ stories:
   - action: action_send_email
   - action: utter_email_sent
   - action: utter_goodbye
+  - action: action_restart
 
 - story: 1A2_complete_path_valid
   steps:
@@ -74,7 +75,7 @@ stories:
     - price: mid
   - action: action_search_restaurants
   - slot_was_set:
-    - email_body: Top 10 restaurants 
+    - email_body: "Top 10 restaurants"
     - no_restaurant_found: no
   - action: utter_email_conf
   - intent: affirm
@@ -88,6 +89,51 @@ stories:
   - slot_was_set:
     - invalid_email: yes
   - action: utter_goodbye
+  - action: action_restart
+
+- story: 1A3_complete_path_valid
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: restaurant_search
+  - action: utter_ask_location
+  - intent: restaurant_search
+    entities:
+    - location: delhi
+  - slot_was_set:
+    - location: delhi
+  - action: action_search_city
+  - slot_was_set:
+    - no_restaurant_found: no
+  - action: utter_ask_cuisine
+  - intent: restaurant_search
+    entities:
+    - cuisine: chinese
+  - slot_was_set:
+    - cuisine: chinese
+  - action: utter_ask_price
+  - intent: budget
+    entities:
+    - price: mid
+  - slot_was_set:
+    - price: mid
+  - action: action_search_restaurants
+  - slot_was_set:
+    - no_restaurant_found: no
+    - email_body: "Top 10 restaurants" 
+  - action: utter_email_conf
+  - intent: email_confirmation
+    entities:
+    - email: sriks@gmail.com
+  - slot_was_set:
+    - email: sriks@gmail.com
+  - action: action_val_email
+  - slot_was_set:
+    - invalid_email: no
+  - action: action_send_email
+  - action: utter_email_sent
+  - action: utter_goodbye
+  - action: action_restart
 
 - story: 1B1_complete_path_valid
   steps:
@@ -123,7 +169,7 @@ stories:
     - price: mid
   - action: action_search_restaurants
   - slot_was_set:
-    - email_body: Top 10 restaurants 
+    - email_body: "Top 10 restaurants"
     - no_restaurant_found: no
   - action: utter_email_conf
   - intent: affirm
@@ -139,6 +185,7 @@ stories:
   - action: action_send_email
   - action: utter_email_sent
   - action: utter_goodbye
+  - action: action_restart
 
 - story: 1B2_complete_path_valid
   steps:
@@ -174,7 +221,7 @@ stories:
     - price: mid
   - action: action_search_restaurants
   - slot_was_set:
-    - email_body: Top 10 restaurants 
+    - email_body: "Top 10 restaurants"
     - no_restaurant_found: no
   - action: utter_email_conf
   - intent: affirm
@@ -188,6 +235,7 @@ stories:
   - slot_was_set:
     - invalid_email: yes
   - action: utter_goodbye
+  - action: action_restart
 
 - story: 1C_complete_path_valid
   steps:
@@ -213,6 +261,7 @@ stories:
     - no_restaurant_found: yes
   - action: utter_no_results_found
   - action: utter_goodbye
+  - action: action_restart
 
 - story: 2A_complete_path_valid_when_user_denies_email
   steps:
@@ -242,11 +291,12 @@ stories:
     - price: mid
   - action: action_search_restaurants
   - slot_was_set:
-    - email_body: Top 10 restaurants 
+    - email_body: "Top 10 restaurants" 
     - no_restaurant_found: no
   - action: utter_email_conf
   - intent: deny
   - action: utter_goodbye
+  - action: action_restart
 
 - story: 2B_complete_path_valid_when_user_denies_email
   steps:
@@ -284,11 +334,12 @@ stories:
     - price: mid
   - action: action_search_restaurants
   - slot_was_set:
-    - email_body: Top 10 restaurants 
+    - email_body: "Top 10 restaurants" 
     - no_restaurant_found: no
   - action: utter_email_conf
   - intent: deny
   - action: utter_goodbye
+  - action: action_restart
 
 - story: 2C_complete_path_valid_when_user_denies_email
   steps:
@@ -314,6 +365,7 @@ stories:
     - no_restaurant_found: yes
   - action: utter_no_results_found
   - action: utter_goodbye
+  - action: action_restart
   
 - story: 3A_complete_path_invalid_when_no_restaurants_found
   steps:
@@ -409,6 +461,7 @@ stories:
     - no_restaurant_found: yes
   - action: utter_no_results_found
   - action: utter_goodbye
+  - action: action_restart
 
 - story: 4A1_location_specified_valid_when_user_asks_email
   steps:
@@ -436,7 +489,7 @@ stories:
     - price: mid
   - action: action_search_restaurants
   - slot_was_set:
-    - email_body: Top 10 restaurants 
+    - email_body: "Top 10 restaurants" 
     - no_restaurant_found: no
   - action: utter_email_conf
   - intent: affirm
@@ -452,6 +505,7 @@ stories:
   - action: action_send_email
   - action: utter_email_sent
   - action: utter_goodbye
+  - action: action_restart
 
 - story: 4A2_location_specified_valid_when_user_asks_email
   steps:
@@ -479,7 +533,7 @@ stories:
     - price: mid
   - action: action_search_restaurants
   - slot_was_set:
-    - email_body: Top 10 restaurants 
+    - email_body: "Top 10 restaurants" 
     - no_restaurant_found: no
   - action: utter_email_conf
   - intent: affirm
@@ -493,7 +547,7 @@ stories:
   - slot_was_set:
     - invalid_email: yes
   - action: utter_goodbye
-
+  - action: action_restart
 
 - story: 4B1_location_specified_valid_when_user_asks_email
   steps:
@@ -529,7 +583,7 @@ stories:
     - price: mid
   - action: action_search_restaurants
   - slot_was_set:
-    - email_body: Top 10 restaurants 
+    - email_body: "Top 10 restaurants" 
     - no_restaurant_found: no
   - action: utter_email_conf
   - intent: affirm
@@ -545,6 +599,7 @@ stories:
   - action: action_send_email
   - action: utter_email_sent
   - action: utter_goodbye
+  - action: action_restart
 
 - story: 4B2_location_specified_valid_when_user_asks_email
   steps:
@@ -580,7 +635,7 @@ stories:
     - price: mid
   - action: action_search_restaurants
   - slot_was_set:
-    - email_body: Top 10 restaurants 
+    - email_body: "Top 10 restaurants" 
     - no_restaurant_found: no
   - action: utter_email_conf
   - intent: affirm
@@ -594,6 +649,7 @@ stories:
   - slot_was_set:
     - invalid_email: yes
   - action: utter_goodbye
+  - action: action_restart
 
 - story: 4C_location_specified_valid_when_user_asks_email
   steps:
@@ -617,6 +673,7 @@ stories:
     - no_restaurant_found: yes
   - action: utter_no_results_found
   - action: utter_goodbye
+  - action: action_restart
 
 - story: 5A_location_specified_valid_when_user_denies_email
   steps:
@@ -644,11 +701,12 @@ stories:
     - price: mid
   - action: action_search_restaurants
   - slot_was_set:
-    - email_body: Top 10 restaurants 
+    - email_body: "Top 10 restaurants" 
     - no_restaurant_found: no
   - action: utter_email_conf
   - intent: deny
   - action: utter_goodbye
+  - action: action_restart
 
 - story: 5B_location_specified_valid_when_user_denies_email
   steps:
@@ -684,11 +742,12 @@ stories:
     - price: mid
   - action: action_search_restaurants
   - slot_was_set:
-    - email_body: Top 10 restaurants 
+    - email_body: "Top 10 restaurants" 
     - no_restaurant_found: no
   - action: utter_email_conf
   - intent: deny
   - action: utter_goodbye
+  - action: action_restart
 
 - story: 5C_location_specified_valid_when_user_denies_email
   steps:
@@ -712,6 +771,7 @@ stories:
     - no_restaurant_found: yes
   - action: utter_no_results_found
   - action: utter_goodbye
+  - action: action_restart
 
 - story: 6_invalid_greet_out_of_scope
   steps: 
@@ -744,7 +804,7 @@ stories:
     - price: mid
   - action: action_search_restaurants
   - slot_was_set:
-    - email_body: Top 10 restaurants 
+    - email_body: "Top 10 restaurants" 
     - no_restaurant_found: no
   - action: utter_email_conf
   - intent: affirm
@@ -760,6 +820,7 @@ stories:
   - action: action_send_email
   - action: utter_email_sent
   - action: utter_goodbye
+  - action: action_restart
 
 - story: 7A2_location_cusine_specified_valid_when_user_asks_email
   steps:
@@ -783,7 +844,7 @@ stories:
     - price: mid
   - action: action_search_restaurants
   - slot_was_set:
-    - email_body: Top 10 restaurants 
+    - email_body: "Top 10 restaurants" 
     - no_restaurant_found: no
   - action: utter_email_conf
   - intent: affirm
@@ -797,6 +858,7 @@ stories:
   - slot_was_set:
     - invalid_email: yes
   - action: utter_goodbye
+  - action: action_restart
 
 
 - story: 7B1_location_cusine_specified_valid_when_user_asks_email
@@ -831,7 +893,7 @@ stories:
     - price: mid
   - action: action_search_restaurants
   - slot_was_set:
-    - email_body: Top 10 restaurants 
+    - email_body: "Top 10 restaurants" 
     - no_restaurant_found: no
   - action: utter_email_conf
   - intent: affirm
@@ -847,6 +909,7 @@ stories:
   - action: action_send_email
   - action: utter_email_sent
   - action: utter_goodbye
+  - action: action_restart
 
 - story: 7B2_location_cusine_specified_valid_when_user_asks_email
   steps:
@@ -880,7 +943,7 @@ stories:
     - price: mid
   - action: action_search_restaurants
   - slot_was_set:
-    - email_body: Top 10 restaurants 
+    - email_body: "Top 10 restaurants" 
     - no_restaurant_found: no
   - action: utter_email_conf
   - intent: affirm
@@ -894,6 +957,7 @@ stories:
   - slot_was_set:
     - invalid_email: yes
   - action: utter_goodbye
+  - action: action_restart
 
 
 - story: 7C_location_cusine_specified_valid_when_user_asks_email
@@ -922,6 +986,7 @@ stories:
     - no_restaurant_found: yes
   - action: utter_no_results_found
   - action: utter_goodbye
+  - action: action_restart
 
 - story: 8A_location_cuisine_specified_valid_when_user_denies_email
   steps:
@@ -945,11 +1010,12 @@ stories:
     - price: mid
   - action: action_search_restaurants
   - slot_was_set:
-    - email_body: Top 10 restaurants 
+    - email_body: "Top 10 restaurants" 
     - no_restaurant_found: no
   - action: utter_email_conf
   - intent: deny
   - action: utter_goodbye
+  - action: action_restart
 
 - story: 8B_location_cuisine_specified_valid_when_user_denies_email
   steps:
@@ -983,11 +1049,12 @@ stories:
     - price: mid
   - action: action_search_restaurants
   - slot_was_set:
-    - email_body: Top 10 restaurants 
+    - email_body: "Top 10 restaurants" 
     - no_restaurant_found: no
   - action: utter_email_conf
   - intent: deny
   - action: utter_goodbye
+  - action: action_restart
 
 - story: 8C_location_cuisine_specified_valid_when_user_denies_email
   steps:
@@ -1015,3 +1082,5 @@ stories:
     - no_restaurant_found: yes
   - action: utter_no_results_found
   - action: utter_goodbye
+  - action: action_restart
+
