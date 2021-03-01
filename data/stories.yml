@@ -396,6 +396,7 @@ stories:
   - action: action_search_restaurants
   - slot_was_set:
     - no_restaurant_found: yes
+  - action: utter_goodbye
   - action: action_restart
 
 - story: 3B_complete_path_invalid_when_no_restaurants_found
@@ -435,6 +436,7 @@ stories:
   - action: action_search_restaurants
   - slot_was_set:
     - no_restaurant_found: yes
+  - action: utter_goodbye
   - action: action_restart
 
 - story: 3C_complete_path_invalid_when_no_restaurants_found
@@ -860,7 +862,6 @@ stories:
   - action: utter_goodbye
   - action: action_restart
 
-
 - story: 7B1_location_cusine_specified_valid_when_user_asks_email
   steps:
   - intent: greet
@@ -958,7 +959,6 @@ stories:
     - invalid_email: yes
   - action: utter_goodbye
   - action: action_restart
-
 
 - story: 7C_location_cusine_specified_valid_when_user_asks_email
   steps:
@@ -1084,3 +1084,270 @@ stories:
   - action: utter_goodbye
   - action: action_restart
 
+- story: 9A_location_cusine_price_specified_valid_when_user_asks_email
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: restaurant_search
+    entities:
+    - location: delhi
+    - cuisine: chinese
+    - price: mid
+  - slot_was_set:
+    - location: delhi
+    - cuisine: chinese
+    - price: mid
+  - action: action_search_city
+  - slot_was_set:
+    - no_restaurant_found: no
+    - location: delhi
+    - cuisine: chinese
+    - price: mid
+  - action: action_search_restaurants
+  - slot_was_set:
+    - email_body: Top 10 restaurants 
+    - no_restaurant_found: no
+  - action: utter_email_conf
+  - intent: affirm
+  - action: utter_ask_email
+  - intent: email_confirmation
+    entities:
+    - email: sriks@gmail.com
+  - slot_was_set:
+    - email: sriks@gmail.com
+  - action: action_val_email
+  - slot_was_set:
+    - invalid_email: no
+  - action: action_send_email
+  - action: utter_email_sent
+  - action: utter_goodbye
+
+- story: 9B_location_cuisine_price_specified_valid_when_user_denies_email
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: restaurant_search
+    entities:
+    - location: delhi
+    - cuisine: chinese
+    - price: mid
+  - action: action_search_city
+  - slot_was_set:
+    - location: delhi
+    - cuisine: chinese
+    - price: mid
+    - no_restaurant_found: no
+  - action: action_search_restaurants
+  - slot_was_set:
+    - email_body: Top 10 restaurants 
+    - no_restaurant_found: no
+  - action: utter_email_conf
+  - intent: deny
+  - action: utter_goodbye
+
+- story: 9C_location_cusine_price_specified_invalid_when_user_asks_email
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: restaurant_search
+    entities:
+    - location: delhi
+    - cuisine: chinese
+    - price: mid
+  - slot_was_set:
+    - location: delhi
+    - cuisine: chinese
+    - price: mid
+  - action: action_search_city
+  - slot_was_set:
+    - no_restaurant_found: yes
+    - cuisine: chinese
+    - price: mid
+  - intent: restaurant_search
+    entities:
+    - location: delhi
+  - action: action_search_city
+  - slot_was_set:
+    - no_restaurant_found: no
+  - action: action_search_restaurants
+  - slot_was_set:
+    - email_body: Top 10 restaurants 
+    - no_restaurant_found: no
+  - action: utter_email_conf
+  - intent: affirm
+  - action: utter_ask_email
+  - intent: email_confirmation
+    entities:
+    - email: sriks@gmail.com
+  - slot_was_set:
+    - email: sriks@gmail.com
+  - action: action_val_email
+  - slot_was_set:
+    - invalid_email: no
+  - action: action_send_email
+  - action: utter_email_sent
+  - action: utter_goodbye
+
+- story: 9D_location_cusine_price_specified_invalid_when_user_denies_email
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: restaurant_search
+    entities:
+    - location: delhi
+    - cuisine: chinese
+    - price: mid
+  - slot_was_set:
+    - location: delhi
+    - cuisine: chinese
+    - price: mid
+  - action: action_search_city
+  - slot_was_set:
+    - no_restaurant_found: yes
+    - cuisine: chinese
+    - price: mid
+  - intent: restaurant_search
+    entities:
+    - location: delhi
+  - action: action_search_city
+  - slot_was_set:
+    - no_restaurant_found: no
+  - action: action_search_restaurants
+  - slot_was_set:
+    - email_body: Top 10 restaurants 
+    - no_restaurant_found: no
+  - action: utter_email_conf
+  - intent: deny
+  - action: utter_goodbye
+
+- story: 9E_location_cusine_price_specified_invalid_retries_exahusted
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: restaurant_search
+    entities:
+    - location: delhi
+    - cuisine: chinese
+    - price: mid
+  - slot_was_set:
+    - location: delhi
+    - cuisine: chinese
+    - price: mid
+  - action: action_search_city
+  - slot_was_set:
+    - no_restaurant_found: yes
+    - cuisine: chinese
+    - price: mid
+  - intent: restaurant_search
+    entities:
+    - location: delhi
+  - action: action_search_city
+  - slot_was_set:
+    - no_restaurant_found: yes
+  - action: utter_goodbye
+  - action: action_restart
+
+- story: 10A_cusine_specified_invalid
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: restaurant_search
+    entities:
+    - cuisine: thai
+  - slot_was_set:
+    - cuisine: thai
+  - action: utter_ask_location
+  - intent: restaurant_search
+    entities:
+    - location: agra
+  - slot_was_set:
+    - location: agra
+  - action: action_search_city
+  - slot_was_set:
+    - no_restaurant_found: no
+  - action: utter_ask_price
+  - intent: budget
+    entities:
+    - price: mid
+  - slot_was_set:
+    - price: mid
+  - action: action_search_restaurants
+  - slot_was_set:
+    - no_restaurant_found: yes
+  - action: utter_goodbye
+  - action: action_restart
+
+- story: 10B_cusine_specified_valid_email_asked
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: restaurant_search
+    entities:
+    - cuisine: north indian
+  - slot_was_set:
+    - cuisine: north indian
+  - action: utter_ask_location
+  - intent: restaurant_search
+    entities:
+    - location: agra
+  - slot_was_set:
+    - location: agra
+  - action: action_search_city
+  - slot_was_set:
+    - no_restaurant_found: no
+  - action: utter_ask_price
+  - intent: budget
+    entities:
+    - price: mid
+  - slot_was_set:
+    - price: mid
+  - action: action_search_restaurants
+  - slot_was_set:
+    - no_restaurant_found: no
+  - action: utter_email_conf
+  - intent: affirm
+  - action: utter_ask_email
+  - intent: email_confirmation
+    entities:
+    - email: sriks@gmail.com
+  - slot_was_set:
+    - email: sriks@gmail.com
+  - action: action_val_email
+  - slot_was_set:
+    - invalid_email: no
+  - action: action_send_email
+  - action: utter_email_sent
+  - action: utter_goodbye
+  - action: action_restart
+
+- story: 10C_cusine_specified_valid_email_denied
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: restaurant_search
+    entities:
+    - cuisine: north indian
+  - slot_was_set:
+    - cuisine: north indian
+  - action: utter_ask_location
+  - intent: restaurant_search
+    entities:
+    - location: agra
+  - slot_was_set:
+    - location: agra
+  - action: action_search_city
+  - slot_was_set:
+    - no_restaurant_found: no
+  - action: utter_ask_price
+  - intent: budget
+    entities:
+    - price: mid
+  - slot_was_set:
+    - price: mid
+  - action: action_search_restaurants
+  - slot_was_set:
+    - no_restaurant_found: no
+  - action: utter_email_conf
+  - intent: deny
+  - action: utter_goodbye
+  - action: action_restart

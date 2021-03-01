@@ -87,17 +87,18 @@ nlu:
     - I am searching for a dinner spot
     - I am looking for some restaurants in [Delhi](location).
     - I am looking for [chinese](cuisine) restaurants in [Delhi](location).
-    - I am looking for [low](price) [chinese](cuisine) restaurants in [Delhi](location).
+    - I am looking for [cheap]{"entity": "price", "value": "low"} [chinese](cuisine) restaurants in [New Delhi](location).
     - I am looking for [mid](price) range [chinese](cuisine) restaurants in [Delhi](location).
     - I am looking for [high](price) range [chinese](cuisine) restaurants in [Delhi](location).
     - I am looking for some restaurants in [Bangalore](location)
     - show me [chinese](cuisine) restaurants
-    - show me [chines]{"entity": "cuisine", "value": "chinese"} restaurants in the [New Delhi]{"entity": "location", "value": "Delhi"}
+    - show me [chines]{"entity": "cuisine", "value": "chinese"} restaurants in the [New Delhi](location)
     - show me a [mexican](cuisine) place in the [centre](location)
     - i am looking for an [indian](cuisine) spot called olaolaolaolaolaola
     - search for restaurants
     - anywhere in the [west](location)
     - I am looking for [asian fusion](cuisine) food
+    - I am looking for [thai](cuisine) restaurants
     - I am looking a restaurant in [294328](location)
     - in [Gurgaon](location)
     - [South Indian](cuisine)
@@ -126,7 +127,8 @@ nlu:
     - Ok. show me some in [Delhi](location)
     - Im hungry. Looking out for some good restaurants
     - [bengaluru]{"entity": "location", "value": "bangalore"}
-    - [Chinese]{"entity": "cuisine", "value": "chinese"}
+    - im looking for [thai](cuisine) restaurants
+    - [agra](location)
 - intent: budget
   examples: |
     - [low](price)
@@ -265,16 +267,22 @@ nlu:
     - Why don’t you answer?
     - But you're an english site :(
     - can you help me to build a bot
+- synonym: low
+  examples: |
+    - cheap
+    - less than 300
+    - <300
+    - below 300
+    - economical
+    - inexpensive
+    - shabby
+    - low-priced
+    - reasonable
 - synonym: chinese
   examples: |
     - chines
     - Chinese
     - Chines
-- synonym: Delhi
-  examples: |
-    - New Delhi
-    - delhi
-    - dilli
 - synonym: mid
   examples: |
     - moderate
@@ -290,17 +298,10 @@ nlu:
     - 300 to 700
     - Rs. 300 to 700
     - Rs.300 to 700
-- synonym: low
+- synonym: bangalore
   examples: |
-    - less than 300
-    - <300
-    - below 300
-    - economical
-    - inexpensive
-    - shabby
-    - low-priced
-    - reasonable
-    - cheap
+    - bengaluru
+    - Bengaluru
 - synonym: high
   examples: |
     - >700
@@ -312,6 +313,11 @@ nlu:
     - overpriced
     - lavish
     - rich
+- synonym: New Delhi
+  examples: |
+    - delhi
+    - dilli
+    - Delhi
 - synonym: Mysore
   examples: |
     - Mysuru
@@ -332,6 +338,8 @@ nlu:
   examples: |
     - Bombay
     - Bambai
+    - munbai
+    - mubaim
 - synonym: Puducherry
   examples: |
     - Pondy
@@ -357,9 +365,6 @@ nlu:
 - synonym: '4'
   examples: |
     - four
-- synonym: bangalore
-  examples: |
-    - Bengaluru
 - synonym: vegetarian
   examples: |
     - veggie

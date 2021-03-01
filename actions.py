@@ -14,6 +14,7 @@ from email.mime.multipart import MIMEMultipart
 ZomatoData = pd.read_csv('zomato.csv')
 ZomatoData = ZomatoData.drop_duplicates().reset_index(drop=True)
 WeOperate = list(ZomatoData["City"].str.lower().unique())
+Cuisines = ["north indian", "south indian", "american", "chinese", "italian", "mexican"]
 
 def RestaurantSearch(City,Cuisine,Price):
 	print(City, Cuisine, Price)
@@ -71,8 +72,8 @@ class ActionSearchRestaurants(Action):
 		count = 0
 		bot_response_header = "Showing top 5 restaurants \n===========================================\n"
 		email_response_header = "Top 10 restaurants \n===========================================\n"
-		if results.shape[0] == 0:
-				dispatcher.utter_message("Sorry, no restaurant found for your criteria. you might what to start over?")
+		if results.shape[0] == 0 or (cuisine.lower() not in Cuisines):
+				dispatcher.utter_message("Sorry, no restaurant(s) found for your criteria")
 				return [SlotSet('no_restaurant_found', 'yes')]
 		else:
 			for restaurant in results.iterrows():
