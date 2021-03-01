@@ -49,6 +49,11 @@ slots:
     values:
       - yes
       - no
+  invalid_email:
+    type: categorical
+    values:
+      - yes
+      - no
 responses:
   utter_ask_cuisine:
   - buttons:
@@ -117,3 +122,5 @@ actions:
 - utter_goodbye
 - utter_greet
 - utter_no_results_found
+- action_search_city
+- action_val_email

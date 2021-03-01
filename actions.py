@@ -12,6 +12,7 @@ from email.mime.multipart import MIMEMultipart
 
 ZomatoData = pd.read_csv('zomato.csv')
 ZomatoData = ZomatoData.drop_duplicates().reset_index(drop=True)
+WeOperate = list(ZomatoData["City"].str.lower().unique())
 
 def RestaurantSearch(City,Cuisine,Price):
 	print(City, Cuisine, Price)
@@ -33,6 +34,24 @@ def get_price_range(price):
 		return "between Rs 300 to 700"
 	elif(price=="high"):
 		return "greater than 700"
+
+def CitySearch(City):
+	if(City.lower() in WeOperate):
+		return '1'
+	else:
+		return '0'
+
+class ActionValEmail(Action):	
+	def name(self):
+		return 'action_val_email'
+
+	def run(self, dispatcher, tracker, domain):
+		to_user = tracker.get_slot('email')
+		if re.search(r'\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}\b', to_user, re.I):
+			return [SlotSet('invalid_email', 'no')]
+		else:
+			dispatcher.utter_message("The email ID is invalid.")
+			return [SlotSet('invalid_email', 'yes')]
 
 class ActionSearchRestaurants(Action):	
 	def name(self):
@@ -66,6 +85,20 @@ class ActionSearchRestaurants(Action):
 			return [SlotSet('email_body', email_response_header + response)]
 
 
+class ActionSearchCity(Action):	
+	def name(self):
+		return 'action_search_city'
+
+	def run(self, dispatcher, tracker, domain):
+		loc = tracker.get_slot('location')
+		result = CitySearch(City=loc)
+		print(result)
+		response=""
+		if result == '0':
+			dispatcher.utter_message("Sorry, we don’t operate in this city. Can you please specify some other location?")
+			return [SlotSet('no_restaurant_found', 'yes')]
+		else:
+			return [SlotSet('no_restaurant_found', 'no')]
 
 class ActionSendEmail(Action):
 	
@@ -92,3 +125,4 @@ class ActionSendEmail(Action):
 				server.close()
 			except: 
 				dispatcher.utter_message("Something went wrong, we could not send you the email. Please try again later.")
+			return [AllSlotsReset()]
