@@ -4,14 +4,14 @@ session_config:
   carry_over_slots_to_new_session: true
 intents:
 - restaurant_search
-- budget
-- stop
-- greet
-- email_confirmation
-- goodbye
-- affirm
-- deny
 - out_of_scope
+- affirm
+- greet
+- budget
+- email_confirmation
+- stop
+- goodbye
+- deny
 entities:
 - cuisine
 - email

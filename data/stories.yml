@@ -1247,15 +1247,11 @@ stories:
   - action: utter_goodbye
   - action: action_restart
 
-- story: 10A_cusine_specified_invalid
+- story: interactive_story_3
   steps:
   - intent: greet
   - action: utter_greet
   - intent: restaurant_search
-    entities:
-    - cuisine: thai
-  - slot_was_set:
-    - cuisine: thai
   - action: utter_ask_location
   - intent: restaurant_search
     entities:
@@ -1265,6 +1261,12 @@ stories:
   - action: action_search_city
   - slot_was_set:
     - no_restaurant_found: no
+  - action: utter_ask_cuisine
+  - intent: restaurant_search
+    entities:
+    - cuisine: chinese
+  - slot_was_set:
+    - cuisine: chinese
   - action: utter_ask_price
   - intent: budget
     entities:
@@ -1273,81 +1275,19 @@ stories:
     - price: mid
   - action: action_search_restaurants
   - slot_was_set:
-    - no_restaurant_found: yes
-  - action: utter_goodbye
-  - action: action_restart
-
-- story: 10B_cusine_specified_valid_email_asked
-  steps:
-  - intent: greet
-  - action: utter_greet
-  - intent: restaurant_search
-    entities:
-    - cuisine: north indian
-  - slot_was_set:
-    - cuisine: north indian
-  - action: utter_ask_location
-  - intent: restaurant_search
-    entities:
-    - location: agra
-  - slot_was_set:
-    - location: agra
-  - action: action_search_city
-  - slot_was_set:
-    - no_restaurant_found: no
-  - action: utter_ask_price
-  - intent: budget
-    entities:
-    - price: mid
-  - slot_was_set:
-    - price: mid
-  - action: action_search_restaurants
-  - slot_was_set:
-    - no_restaurant_found: no
+    - email_body: "Top 10 restaurants \n===========================================\nFound Mama Chicken Mama Franky House in A-17, Shoping Arcade, Sadar Bazaar, Agra Cantt, Agra has been rated 4.3, average cost for two is 600\n\nFound Aahar in 26/118, Opposite Income Tax Building, Sanjay Place, Civil Lines, Agra has been rated 4.2, average cost for two is 700\n\nFound Bikanervala in Opposite ITC Mughal, Fatehbad Road, Tajganj, Agra has been rated 4.0, average cost for two is 700\n\n"
   - action: utter_email_conf
   - intent: affirm
   - action: utter_ask_email
   - intent: email_confirmation
     entities:
-    - email: sriks@gmail.com
+    - email: vism@microsoft.com
   - slot_was_set:
-    - email: sriks@gmail.com
+    - email: vism@microsoft.com
   - action: action_val_email
   - slot_was_set:
     - invalid_email: no
   - action: action_send_email
   - action: utter_email_sent
-  - action: utter_goodbye
-  - action: action_restart
-
-- story: 10C_cusine_specified_valid_email_denied
-  steps:
-  - intent: greet
-  - action: utter_greet
-  - intent: restaurant_search
-    entities:
-    - cuisine: north indian
-  - slot_was_set:
-    - cuisine: north indian
-  - action: utter_ask_location
-  - intent: restaurant_search
-    entities:
-    - location: agra
-  - slot_was_set:
-    - location: agra
-  - action: action_search_city
-  - slot_was_set:
-    - no_restaurant_found: no
-  - action: utter_ask_price
-  - intent: budget
-    entities:
-    - price: mid
-  - slot_was_set:
-    - price: mid
-  - action: action_search_restaurants
-  - slot_was_set:
-    - no_restaurant_found: no
-  - action: utter_email_conf
-  - intent: deny
   - action: utter_goodbye
   - action: action_restart

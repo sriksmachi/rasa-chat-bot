@@ -113,7 +113,7 @@ class ActionSendEmail(Action):
 				from_user = 'upgrad.sriks@gmail.com' # replace email with your own
 				to_user = tracker.get_slot('email')
 				print('sending email to ' + to_user)
-				password = 'ap28be4393' # replace password with your own
+				password = 'password' # replace password with your own
 				server = smtplib.SMTP('smtp.gmail.com',587)
 				server.starttls()
 				server.login(from_user, password)

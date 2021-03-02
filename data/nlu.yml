@@ -129,6 +129,9 @@ nlu:
     - [bengaluru]{"entity": "location", "value": "bangalore"}
     - im looking for [thai](cuisine) restaurants
     - [agra](location)
+    - [hyderabad](location)
+    - [agra](location)
+    - [Chinese]{"entity": "cuisine", "value": "chinese"}
 - intent: budget
   examples: |
     - [low](price)
@@ -156,6 +159,7 @@ nlu:
     - email id is [abc@gmail.com](email)
     - yes. Please send it to [abc@gmail.com](email)
     - yes, send it to [vism@microsoft.com](email)
+    - [vism@microsoft.com](email)
 - intent: out_of_scope
   examples: |
     - I want pizza
@@ -267,6 +271,7 @@ nlu:
     - Why don’t you answer?
     - But you're an english site :(
     - can you help me to build a bot
+    - hyderbad
 - synonym: low
   examples: |
     - cheap
